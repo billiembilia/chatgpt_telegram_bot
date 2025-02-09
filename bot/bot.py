@@ -39,7 +39,22 @@ logger = logging.getLogger(__name__)
 
 user_semaphores = {}
 user_tasks = {}
+async def start(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text("Hello! Elias is here. How can I tease you today? 😉")
 
+def main():
+    application = ApplicationBuilder().token("7235715324:AAHugB45VbReF19mpzipQvBp7caGbXYmyos").build()
+
+    # Add command handlers
+    application.add_handler(CommandHandler("start", start))
+
+    # Add other existing commands
+    application.add_handler(CommandHandler("help", help_command))  # Example, if you have a /help command
+
+    application.run_polling()
+
+if __name__ == "__main__":
+    main()
 HELP_MESSAGE = """Commands:
 ⚪ /retry – Regenerate last bot answer
 ⚪ /new – Start new dialog
